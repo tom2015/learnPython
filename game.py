@@ -8,7 +8,7 @@ c = Canvas(width=800, height=800)
 c.pack()
 tk.title('game')
 
-Step, Num = 5,5
+Step, Num = 5,7
 
 
 def on_keypress_right(evt):
@@ -29,6 +29,15 @@ def on_keypress_right(evt):
         c.itemconfig(i+1, state='hidden')
         c.move(i+1,d-Step*i , 0 )
     c.itemconfig(1,state='normal')  # show first image
+    #embed()
+
+
+
+def on_keypress_left(evt):
+    #c.coords()
+
+
+ 
     
 
 def create_my_images():
@@ -37,12 +46,17 @@ def create_my_images():
         img = PhotoImage(file = 'figure_Rrun%s.gif'%(i))
         rs.append(img)
         c.create_image(80,80, image=img, anchor=NW, state='hidden')
-        c.itemconfig(1,state='normal')
+        c.itemconfig(1,state='normal')    
     return rs
 
 
 
+
+
 c.bind_all('<KeyPress-Right>', on_keypress_right)
+c.bind_all('<KeyPress-Left>', on_keypress_left)
+
+
 
 images = create_my_images()
 
