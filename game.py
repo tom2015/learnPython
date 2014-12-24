@@ -1,55 +1,50 @@
-import time
 from Tkinter import *
-
+import time
 from IPython import embed
 
 tk = Tk()
 
-c = Canvas(width=800, height=800, bg='grey')
+c = Canvas(width=800, height=800)
 c.pack()
 tk.title('game')
 
-def on_key_press_right(evt):
-    c.itemconfig(1, state='hidden')
-    c.move(1, 15, 0)
-    c.move(3, 10,0)
-    c.move(2, 5,0)
+Step, Num = 5,5
 
-    c.itemconfig(2, state='normal')
-    c.update_idletasks() 
-    time.sleep(0.25)
 
-    c.itemconfig(2,state='hidden')
-    c.move(2,10,0)
-
-    c.itemconfig(3, state='normal')
-    c.update_idletasks()
+def on_keypress_right(evt):
+    #distance--------------------------
+    d = Num*Step
     
-    time.sleep(0.25)
-    c.itemconfig(3, state='hidden')
-    c.move(3, 5,0)
-
-    c.itemconfig(1,state='normal')
-
-
-    #c.move(1,10,0)
+    #Run0------------------------------
+    c.itemconfig(1,state='hidden')  # hide first image
+    
+    #move------------------------------
+    c.move(1,d,0)
+        
+    for i in range(1,Num):          # skip first image, processing others.    
+        c.move(i+1,Step*i,0)        # i+1 => second image idx
+        c.itemconfig(i+1, state='normal')
+        c.update_idletasks()
+        time.sleep(0.25)
+        c.itemconfig(i+1, state='hidden')
+        c.move(i+1,d-Step*i , 0 )
+    c.itemconfig(1,state='normal')  # show first image
     
 
-
-c.bind_all('<KeyPress-Right>', on_key_press_right)
-
-image = PhotoImage(file = 'figure_R1.gif')
-c.create_image(80,80, image=image, anchor=NW, state='normal')
-
-image2 = PhotoImage(file = 'figure_Rrun1.gif')
-c.create_image(80,80, image=image2, anchor=NW, state='hidden')
-
-image3 = PhotoImage(file = 'figure_Rrun2.gif')
-c.create_image(80,80, image=image3, anchor=NW, state='hidden')
+def create_my_images():
+    rs = []
+    for i in range(Num):
+        img = PhotoImage(file = 'figure_Rrun%s.gif'%(i))
+        rs.append(img)
+        c.create_image(80,80, image=img, anchor=NW, state='hidden')
+        c.itemconfig(1,state='normal')
+    return rs
 
 
+
+c.bind_all('<KeyPress-Right>', on_keypress_right)
+
+images = create_my_images()
 
 
 mainloop()
-
-
