@@ -25,6 +25,16 @@ def square(num):
     for i in range(2,num):
         print '*{0}*'.format(' '*(num-2))
     print '*'*num
+
+
+
+
+def square(num):
+    print (' '*(num-1)) + '*'
+    for i in range(2,num):
+        print (' '*(num-i)) +'*{0}*'.format(' '*(1+((i-2)*2)))
+    print '*'*((num*2)-1)
+   
    
 
 
@@ -54,9 +64,7 @@ if __name__=='__main__':
 
 
     if 1:
-        square(10)
-
-    
+        square(40)    
 
 
 
