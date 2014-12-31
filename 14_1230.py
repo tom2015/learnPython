@@ -29,7 +29,7 @@ def square(num):
 
 
 
-def square(num):
+def T(num):
     print (' '*(num-1)) + '*'
     for i in range(2,num):
         print (' '*(num-i)) +'*{0}*'.format(' '*(1+((i-2)*2)))
@@ -64,7 +64,7 @@ if __name__=='__main__':
 
 
     if 1:
-        square(40)    
+        T(40)    
 
 
 
