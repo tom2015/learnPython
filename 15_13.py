@@ -1,55 +1,5 @@
 from IPython import embed
 
-
-
-        
-
-
-'''
-
-a = []
-b = [1,2,3,4]
-
-
-mylist = []
-
-if len(a) < len(b):
-    x = len(a)
-else:
-    x = len(b)
-
-
-i = 0
-j = 0
-
-while 1:
-    if i == x: 
-        mylist.extend(b[j:])
-        break
-    if j == x:
-        mylist.extend(a[i:])
-        break
-
-    vala = a[i]
-    valb = b[j]
-    #print i,j,x,mylist
-  
-    if vala < valb:
-        mylist.append(vala)
-        i = i+1
-    if vala > valb:
-        mylist.append(valb)
-        j = j+1
-    if vala == valb:
-        mylist.append(vala,valb)
-
-
-print mylist
-    
-'''
-
-
-
 def merge_list(A,B):
     szA = len(A)
     szB = len(B)
@@ -71,16 +21,39 @@ def merge_list(A,B):
 
 
 
+
+def merge_sort(L):
+    sz = len(L)
+    if sz<2 : return L
+
+    mid = sz/2
+    A = merge_sort(L[:mid])
+    B = merge_sort(L[mid:])
+    
+    return merge_list(A,B)
+
+
 if __name__=='__main__':
+    import random
+
+    if 0:
+        A = [1,]
+        B = [2,]
+
+        L = merge_list(A,B)
+        #assert L==[1,2,3,4,5,]
+        print L
 
 
-    A = [1,]
-    B = [2,]
+    L = range(5)
+    random.shuffle(L)
 
-    L = merge_list(A,B)
-    #assert L==[1,2,3,4,5,]
-    print L
+    print L , '==>' ,
 
+    rs = merge_sort(L)
+    assert rs==range(5)
+
+    print rs
 
 
 
